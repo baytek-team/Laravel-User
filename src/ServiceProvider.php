@@ -4,6 +4,7 @@ namespace Baytek\Laravel\User;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
 
 class ServiceProvider extends AuthServiceProvider
 {
@@ -27,6 +28,6 @@ class ServiceProvider extends AuthServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(PermissionServiceProvider::class);
     }
 }
