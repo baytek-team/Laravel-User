@@ -1,10 +1,10 @@
 <?php
 
-namespace Baytek\Laravel\User\Controllers;
+namespace Baytek\Laravel\Users\Controllers;
 
-use App\User;
+use Baytek\Laravel\Users\User;
 
-use Baytek\Laravel\User\Requests\RoleRequest;
+use Baytek\Laravel\Users\Requests\RoleRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;

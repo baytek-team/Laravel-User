@@ -1,6 +1,6 @@
 <?php
 
-namespace Baytek\Laravel\User;
+namespace Baytek\Laravel\Users;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
