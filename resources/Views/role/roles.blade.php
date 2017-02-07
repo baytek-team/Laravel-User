@@ -1,4 +1,4 @@
-@extends('Pretzel::admin')
+@extends('Content::admin')
 @section('content')
 <h1 class="ui header">
     <i class="users icon"></i>
@@ -15,9 +15,8 @@
     <a class="item" data-tab="user-roles">User Roles</a>
     <a class="item" data-tab="user-permissions">User Permissions</a>
 </div>
-
 <div class="ui bottom attached tab padded segment active" data-tab="role-permissions">
-    <form id="role-permissions" action="{{ action('\Baytek\Laravel\User\Controllers\RoleController@saveRolePermissions') }}" method="POST">
+    <form id="role-permissions" action="{{ route('user.role.save_role_permissions') }}" method="POST">
         {{ csrf_field() }}
         <table class="ui selectable celled very basic table">
             <thead>
@@ -42,12 +41,21 @@
             </tbody>
         </table>
         <div class="ui hidden divider"></div>
-        <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save Role Permissions</button>
+        <div class="ui secondary menu">
+            <div class="item">
+                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save Role Permissions</button>
+            </div>
+            <div class="right item">
+                <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+                &nbsp;
+                <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+            </div>
+        </div>
     </form>
 </div>
 
 <div class="ui bottom attached tab padded segment" data-tab="user-roles">
-    <form id="user-roles" action="{{ action('\Baytek\Laravel\User\Controllers\RoleController@saveUserRoles') }}" method="POST">
+    <form id="user-roles" action="{{ route('user.role.save_user_roles') }}" method="POST">
         {{ csrf_field() }}
         <table class="ui selectable celled very basic table">
             <thead>
@@ -59,23 +67,28 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td class="four wide">{{ $user->first_name . ' ' . $user->last_name }}</td>
-                        @foreach ($roles as $role)
-                            <td><input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif /></td>
-                        @endforeach
-                    </tr>
-                @endforeach
+                <tr>
+                    <td class="four wide">{{ $user->name }}</td>
+                    @foreach ($roles as $role)
+                        <td><input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif /></td>
+                    @endforeach
+                </tr>
             </tbody>
         </table>
         <div class="ui hidden divider"></div>
-        <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save User Roles</button>
+        <div class="ui secondary menu">
+            <div class="item">
+                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save User Roles</button>
+            </div>
+            <div class="right item">
+                <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+            </div>
+        </div>
     </form>
 </div>
 
 <div class="ui bottom attached tab padded segment" data-tab="user-permissions">
-    <form id="user-permissions" action="{{ action('\Baytek\Laravel\User\Controllers\RoleController@saveUserPermissions') }}" method="POST">
+    <form id="user-permissions" action="{{ route('user.role.save_user_permissions') }}" method="POST">
         {{ csrf_field() }}
         <table class="ui selectable celled very basic table">
             <thead>
@@ -87,18 +100,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td class="four wide">{{ $user->first_name . ' ' . $user->last_name }}</td>
-                        @foreach ($permissions as $permission)
-                            <td><input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif /></td>
-                        @endforeach
-                    </tr>
-                @endforeach
+                <tr>
+                    <td class="four wide">{{ $user->name }}</td>
+                    @foreach ($permissions as $permission)
+                        <td><input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif /></td>
+                    @endforeach
+                </tr>
             </tbody>
         </table>
         <div class="ui hidden divider"></div>
-        <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save Permissions</button>
+        <div class="ui secondary menu">
+            <div class="item">
+                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save Permissions</button>
+            </div>
+            <div class="right item">
+                <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+            </div>
+        </div>
     </form>
 </div>
 

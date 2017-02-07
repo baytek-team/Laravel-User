@@ -1,4 +1,4 @@
-@extends('Pretzel::admin')
+@extends('Content::admin')
 @section('content')
 
 <div class="ui two column stackable grid">
@@ -12,7 +12,7 @@
         </h1>
     </div>
     <div class="six wide column right aligned">
-        {!! Menu::form(
+        {{--!! Menu::form(
             ['Delete User' => [
                 'action' =>  'Admin\UserController@destroy',
                 'method' => 'DELETE',
@@ -21,24 +21,24 @@
                 'confirm' => 'Are you sure you want to delete user: '.$user->first_name.' '.$user->last_name.'?',
             ]],
             $user)
-        !!}
+        !!--}}
     </div>
 </div>
 <div class="ui hidden divider"></div>
 <div class="ui hidden divider"></div>
 <div id="registration" class="et_pb_column ui container">
     <div class="ui hidden divider"></div>
-    <form class="ui form" action="{{action('Admin\UserController@update', $user)}}" method="POST">
+    <form class="ui form" action="{{route('user.update', $user)}}" method="POST">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
 
-        @include('app.admin.user.form')
+        @include('User::user.form')
         <div class="ui hidden divider"></div>
         <div class="ui hidden divider"></div>
 
         <div class="ui error message"></div>
         <div class="field actions">
-            <a class="ui button" href="{{ action('Admin\UserController@index') }}">Cancel</a>
+            <a class="ui button" href="{{ route('user.index') }}">Cancel</a>
             <button type="submit" class="ui right floated primary button">
                 Update User Information
             </button>
