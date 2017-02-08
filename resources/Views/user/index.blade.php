@@ -1,29 +1,25 @@
 @extends('Content::admin')
-@section('content')
-<div class="ui grid">
-    <div class="two column row">
 
-        <h1 class="ui header left floated column">
-            <i class="user icon"></i>
-            <div class="content">
-                User Management
-                <div class="sub header">Manage the users of the claims application.</div>
-            </div>
-        </h1>
-        <div class="right floated column">
-            <div class="ui secondary menu">
-                <a class="ui basic primary button right item" href="{{ route('user.create') }}">
-                    <i class="user icon"></i>Add User
-                </a>
-            </div>
+@section('page.head.header')
+    <h1 class="ui header">
+        <i class="user icon"></i>
+        <div class="content">
+            User Management
+            <div class="sub header">Manage the users of the claims application.</div>
+        </div>
+    </h1>
+@endsection
+
+@section('page.head.menu')
+    <div class="ui secondary menu">
+        <div class="right item">
+            <a href="{{ route('user.create') }}" class="ui icon labeled button"><i class="user icon"></i>Add User</a>
         </div>
     </div>
-</div>
+@endsection
 
-<div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
-
-<div class="ui secondary menu">
+@section('content')
+{{-- <div class="ui secondary menu">
     <div class="item"><strong>Sort By:</strong></div>
 
     <div class="right menu">
@@ -35,7 +31,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
 <table class="ui selectable table">
     <thead>
         <tr>
@@ -52,13 +48,14 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td class="collapsing right aligned">
-                    <a class="ui basic primary button" href="{{ route('user.edit', ['user' => $user]) }}">
-                        <i class="user icon"></i>
-                        Edit User
+                    <a href="{{ route('user.edit', ['user' => $user]) }}" class="ui icon labeled primary button">
+                        <i class="pencil icon"></i>Edit
                     </a>
-                    <a class="ui basic button" href="{{ route('user.roles', ['user' => $user]) }}">
-                        <i class="user icon"></i>
-                        Manage Roles
+                    <a class="ui icon labeled button" href="{{ route('user.roles', ['user' => $user]) }}">
+                        <i class="user icon"></i> Manage Roles
+                    </a>
+                    <a href="{{ route('user.destroy', ['user' => $user]) }}" class="ui icon labeled negative button">
+                        <i class="pencil icon"></i>Delete
                     </a>
                 </td>
             </tr>

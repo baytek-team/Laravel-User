@@ -1,15 +1,16 @@
 @extends('Content::admin')
-@section('content')
-<h1 class="ui header">
-    <i class="users icon"></i>
-    <div class="content">
-        Role Management
-        <div class="sub header">Manage the roles and permissions for the users of the claims application.</div>
-    </div>
-</h1>
-<div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
 
+@section('page.head.header')
+    <h1 class="ui header">
+        <i class="user icon"></i>
+        <div class="content">
+            User Management
+            <div class="sub header">Manage the users of the claims application.</div>
+        </div>
+    </h1>
+@endsection
+
+@section('content')
 <div class="ui top attached tabular menu">
     <a class="item active" data-tab="user-roles">User Roles</a>
     <a class="item" data-tab="user-permissions">User Permissions</a>
@@ -28,12 +29,12 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr>
-                        <td class="four wide">{{ $user->name }}</td>
-                        @foreach ($roles as $role)
-                            <td><input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif /></td>
-                        @endforeach
-                    </tr>
+                <tr>
+                    <td class="four wide">{{ $user->name }}</td>
+                    @foreach ($roles as $role)
+                        <td><input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif /></td>
+                    @endforeach
+                </tr>
             </tbody>
         </table>
         <div class="ui hidden divider"></div>

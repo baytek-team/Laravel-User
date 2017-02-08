@@ -26,7 +26,7 @@ class UserController extends BaseController
      */
     public function index(Request $request)
     {
-        return view('User::user.users', [
+        return view('User::user.index', [
             'users' => User::all(),
         ]);
     }

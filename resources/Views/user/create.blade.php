@@ -1,33 +1,17 @@
 @extends('Content::admin')
-@section('content')
 
-<div class="ui two column stackable grid">
-    <div class="ten wide column">
-        <h1 class="ui header">
-            <i class="user icon"></i>
-            <div class="content">
-                User Management
-                <div class="sub header">Manage the users of the claims application.</div>
-            </div>
-        </h1>
-    </div>
-    <div class="six wide column right aligned">
-        {{--!! Menu::form(
-            ['Delete User' => [
-                'action' =>  'Admin\UserController@destroy',
-                'method' => 'DELETE',
-                'class' => 'ui negative button',
-                'prepend' => '<i class="delete icon"></i>',
-                'confirm' => 'Are you sure you want to delete user: '.$user->first_name.' '.$user->last_name.'?',
-            ]],
-            $user)
-        !!--}}
-    </div>
-</div>
-<div class="ui hidden divider"></div>
-<div class="ui hidden divider"></div>
+@section('page.head.header')
+    <h1 class="ui header">
+        <i class="user icon"></i>
+        <div class="content">
+            User Management
+            <div class="sub header">Manage the users of the claims application.</div>
+        </div>
+    </h1>
+@endsection
+
+@section('content')
 <div id="registration" class="et_pb_column ui container">
-    <div class="ui hidden divider"></div>
     <form class="ui form" action="{{route('user.update', $user)}}" method="POST">
         {{ csrf_field() }}
 
@@ -45,5 +29,4 @@
 
     </form>
 </div>
-
 @endsection
