@@ -4,9 +4,17 @@
 	User Routes for adding and managing users.
 */
 
-Route::group(['namespace' => '\Baytek\Laravel\Users\Controllers', 'prefix' => 'admin', 'middleware' => 'web'], function () {
+Route::group([
+		'namespace' => '\Baytek\Laravel\Users\Controllers',
+		'prefix' => 'admin',
+		'middleware' => 'web'
+	], function ()
+	{
+
+	Route::get('user/profile', 'ProfileController@index')->name('user.profile');
 
 	Route::resource('user', 'UserController');
+
 	Route::get('user/{user}/roles', 'UserController@roles')->name('user.roles');
 	Route::post('user/{user}/roles', 'UserController@rolesSave')->name('user.roles.save');
 
