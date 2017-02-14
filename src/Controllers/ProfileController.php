@@ -25,7 +25,9 @@ class ProfileController extends BaseController
      */
     public function index(Request $request)
     {
-        dd($request);
+        return view('User::user.profile', [
+        	'user' => User::find(1),
+        ]);
     }
 
 }
