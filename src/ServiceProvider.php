@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 
+use Auth;
+use Route;
+
 class ServiceProvider extends AuthServiceProvider
 {
     /**
@@ -19,6 +22,12 @@ class ServiceProvider extends AuthServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Routes.php');
         $this->loadMigrationsFrom(__DIR__.'/../resources/Migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/Views', 'User');
+
+        Route::group(['middleware' => ['web'], 'namespace' => \Baytek\Laravel\Users\Controllers::class], function ($router)
+        {
+            Auth::routes();
+        });
+
     }
 
     /**
