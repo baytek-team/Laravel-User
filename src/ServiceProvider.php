@@ -23,7 +23,12 @@ class ServiceProvider extends AuthServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../resources/Migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/Views', 'User');
 
-        Route::group(['middleware' => ['web'], 'namespace' => \Baytek\Laravel\Users\Controllers::class], function ($router)
+        Route::group([
+            'middleware' => ['web'],
+            'namespace' => \Baytek\Laravel\Users\Controllers::class,
+            'prefix' => 'admin'
+        ],
+        function ($router)
         {
             Auth::routes();
         });
