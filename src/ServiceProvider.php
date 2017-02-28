@@ -2,15 +2,21 @@
 
 namespace Baytek\Laravel\Users;
 
+use Baytek\Laravel\Users\Policies\UserPolicy;
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 
-use Auth;
 use Route;
 
 class ServiceProvider extends AuthServiceProvider
 {
+
+    protected $policies = [
+        User::class => UserPolicy::class,
+    ];
+
     /**
      * Bootstrap the application services.
      *
@@ -22,17 +28,6 @@ class ServiceProvider extends AuthServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Routes.php');
         $this->loadMigrationsFrom(__DIR__.'/../resources/Migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/Views', 'User');
-
-        Route::group([
-            'middleware' => ['web'],
-            'namespace' => \Baytek\Laravel\Users\Controllers::class,
-            'prefix' => 'admin'
-        ],
-        function ($router)
-        {
-            Auth::routes();
-        });
-
     }
 
     /**

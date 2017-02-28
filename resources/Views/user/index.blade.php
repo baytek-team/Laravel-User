@@ -54,9 +54,14 @@
                     <a class="ui icon labeled button" href="{{ route('user.roles', ['user' => $user]) }}">
                         <i class="user icon"></i> Manage Roles
                     </a>
-                    <a href="{{ route('user.destroy', ['user' => $user]) }}" class="ui icon labeled negative button">
-                        <i class="pencil icon"></i>Delete
-                    </a>
+                    {!! new Baytek\Laravel\Menu\Button('Delete', [
+                        'class' => 'ui icon labeled negative button',
+                        'location' => 'user.destroy',
+                        'method' => 'delete',
+                        'model' => $user,
+                        'prepend' => '<i class="delete icon"></i>',
+                        'type' => 'route',
+                    ]) !!}
                 </td>
             </tr>
         @endforeach

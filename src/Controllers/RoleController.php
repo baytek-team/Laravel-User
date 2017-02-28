@@ -20,6 +20,16 @@ class RoleController extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+	/**
+	 * Constructing the Role Controller Class
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth', ['except' => ['index','show']]);
+	}
+
+
+
 	public function index()
 	{
 		return view('User::role.roles', [
@@ -51,7 +61,7 @@ class RoleController extends BaseController
 			}
 		}
 
-		return redirect()->action('\Baytek\Laravel\Users\Controllers\RoleController@index');
+		return redirect()->back();
 	}
 
 	public function saveUserRoles(RoleRequest $post)
@@ -71,7 +81,7 @@ class RoleController extends BaseController
 			}
 		}
 
-		return redirect()->action('\Baytek\Laravel\Users\Controllers\RoleController@index');
+		return redirect()->back();
 	}
 
 	public function saveUserPermissions(RoleRequest $post)
@@ -91,7 +101,7 @@ class RoleController extends BaseController
 			}
 		}
 
-		return redirect()->action('\Baytek\Laravel\Users\Controllers\RoleController@index');
+		return redirect()->back();
 	}
 
 }

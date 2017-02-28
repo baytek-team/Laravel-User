@@ -5,6 +5,7 @@ namespace Baytek\Laravel\Users\Controllers;
 use Auth;
 
 use Baytek\Laravel\Users\User;
+use Baytek\Laravel\Users\Middleware\RootProtection;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -18,6 +19,12 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends BaseController
 {
+
+    public function __construct()
+    {
+        // parent::__construct();
+        $this->middleware( RootProtection::class )->except('index');
+    }
 
     /**
      * Display a listing of the resource.

@@ -10,6 +10,16 @@
     </h1>
 @endsection
 
+@section('page.head.menu')
+    <div class="ui secondary menu">
+        <div class="right item">
+            <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+            &nbsp;
+            <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+        </div>
+    </div>
+@endsection
+
 @section('content')
 <div class="ui top attached tabular menu">
     <a class="item active" data-tab="user-roles">User Roles</a>
@@ -39,11 +49,8 @@
         </table>
         <div class="ui hidden divider"></div>
         <div class="ui secondary menu">
-            <div class="item">
-                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save User Roles</button>
-            </div>
             <div class="right item">
-                <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save User Roles</button>
             </div>
         </div>
     </form>
@@ -72,11 +79,9 @@
         </table>
         <div class="ui hidden divider"></div>
         <div class="ui secondary menu">
-            <div class="item">
-                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save Permissions</button>
-            </div>
             <div class="right item">
-                <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+                <button type="submit" class="ui primary icon labeled button"><i class="save icon"></i> Save Permissions</button>
+
             </div>
         </div>
     </form>
