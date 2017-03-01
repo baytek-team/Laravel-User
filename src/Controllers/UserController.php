@@ -8,22 +8,17 @@ use Baytek\Laravel\Users\User;
 use Baytek\Laravel\Users\Middleware\RootProtection;
 
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Routing\Controller as BaseController;
 
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
 
     public function __construct()
     {
         // parent::__construct();
-        $this->middleware( RootProtection::class )->except('index');
+        $this->middleware(RootProtection::class)->except('index');
     }
 
     /**
@@ -33,6 +28,8 @@ class UserController extends BaseController
      */
     public function index(Request $request)
     {
+        $this->authorize('view', User::class);
+
         return view('User::user.index', [
             'users' => User::all(),
         ]);
@@ -45,6 +42,8 @@ class UserController extends BaseController
      */
     public function create()
     {
+        $this->authorize('create', User::class);
+
         return view('User::user.create', [
             'user' => (new User()),
         ]);
@@ -58,6 +57,8 @@ class UserController extends BaseController
      */
     public function store(Request $request)
     {
+        $this->authorize('create', User::class);
+
         $user = new User($request->all());
         $user->save();
 
@@ -72,7 +73,7 @@ class UserController extends BaseController
      */
     public function show(User $user)
     {
-        //
+         $this->authorize('view', $user);
     }
 
     /**
@@ -83,7 +84,9 @@ class UserController extends BaseController
      */
     public function edit(User $user)
     {
-        return view('User::user.edit', [
+        $this->authorize('update', $user);
+
+    return view('User::user.edit', [
             'user' => $user,
             'roles' => Role::all(),
             'users' => User::all(),
@@ -115,6 +118,8 @@ class UserController extends BaseController
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $user->update($request->all());
 
         return redirect(route('user.index'));
@@ -128,6 +133,8 @@ class UserController extends BaseController
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
+
         $user->delete();
 
         return redirect(route('user.index'));

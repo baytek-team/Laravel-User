@@ -27,8 +27,8 @@ class RoleMiddleware
 
         return abort(403);
 
-        return redirect($link)
-            ->with(['errors', 'You don\'t have rights to do that.'], 'global');
+        // return redirect($link)
+        //     ->with(['errors', 'You don\'t have rights to do that.'], 'global');
     }
 
     /**

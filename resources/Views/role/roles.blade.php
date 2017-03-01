@@ -1,21 +1,11 @@
-@extends('Content::admin')
-
-@section('page.head.header')
-    <h1 class="ui header">
-        <i class="user icon"></i>
-        <div class="content">
-            Role Management
-            <div class="sub header">Manage the roles and permissions for the users of the claims application.</div>
-        </div>
-    </h1>
-@endsection
+@extends('User::role.template')
 
 @section('page.head.menu')
     <div class="ui secondary menu">
         <div class="right item">
-            <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+            <a href="{{ route('permission.index') }}" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
             &nbsp;
-            <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+            <a href="{{ route('role.index') }}" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
         </div>
     </div>
 @endsection
@@ -45,7 +35,9 @@
                         <td class="four wide">{{ $permission->name }}</td>
                         @foreach ($roles as $role)
                             <td>
-                                <input type="checkbox" name="{{ $role->name }}[{{ $permission->name }}]" @if($role->hasPermissionTo($permission))checked="checked"@endif />
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="{{ $role->name }}[{{ $permission->name }}]" @if($role->hasPermissionTo($permission))checked="checked"@endif />
+                                </div>
                             </td>
                         @endforeach
                     </tr>
@@ -78,7 +70,11 @@
                     <tr>
                         <td class="four wide">{{ $user->name }}</td>
                         @foreach ($roles as $role)
-                            <td><input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif /></td>
+                            <td>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif />
+                                </div>
+                            </td>
                         @endforeach
                     </tr>
                 @endforeach
@@ -101,7 +97,7 @@
                 <tr>
                     <th></th>
                     @foreach ($permissions as $permission)
-                        <th>{{ $permission->name }}</th>
+                        <th class="rotate"><div>{{ $permission->name }}</div></th>
                     @endforeach
                 </tr>
             </thead>
@@ -110,7 +106,11 @@
                     <tr>
                         <td class="four wide">{{ $user->name }}</td>
                         @foreach ($permissions as $permission)
-                            <td><input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif /></td>
+                            <td>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif />
+                                </div>
+                            </td>
                         @endforeach
                     </tr>
                 @endforeach
@@ -125,5 +125,21 @@
     </form>
 </div>
 
+<style>
+th.rotate {
+    /* Something you can count on */
+    height: 180px;
+    white-space: nowrap;
+}
+
+th.rotate > div {
+    transform:
+    /* Magic Numbers */
+    translate(25px, 51px)
+    /* 45 is really 360 - 45 */
+    rotate(290deg);
+    width: 20px;
+}
+</style>
 
 @endsection

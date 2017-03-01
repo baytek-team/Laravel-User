@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +20,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', Role::class);
+        $this->authorize('view', Permission::class);
 
-        return view('User::role.index', [
-            'roles' => Role::all(),
+        return view('User::permission.index', [
+            'permissions' => Permission::all(),
         ]);
     }
 
@@ -34,10 +34,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Role::class);
+        $this->authorize('create', Permission::class);
 
-        return view('User::role.create', [
-            'role' => (new Role()),
+        return view('User::permission.create', [
+            'permission' => (new Permission()),
         ]);
     }
 
@@ -49,12 +49,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Role::class);
+        $this->authorize('create', Permission::class);
 
-        $role = new Role($request->all());
-        $role->save();
+        $permission = new Permission($request->all());
+        $permission->save();
 
-        return redirect(route('role.index'));
+        return redirect(route('permission.index'));
     }
 
     /**
@@ -63,9 +63,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Permission $permission)
     {
-        $this->authorize('view', $role);
+        $this->authorize('view', $permission);
     }
 
     /**
@@ -74,12 +74,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Permission $permission)
     {
-        $this->authorize('update', $role);
+        $this->authorize('update', $permission);
 
-        return view('User::role.edit', [
-            'role' => $role,
+        return view('User::permission.edit', [
+            'permission' => $permission,
         ]);
     }
 
@@ -90,13 +90,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Permission $permission)
     {
-        $this->authorize('update', $role);
+        $this->authorize('update', $permission);
 
-        $role->update($request->all());
+        $permission->update($request->all());
 
-        return redirect(route('role.index'));
+        return redirect(route('permission.index'));
     }
 
     /**
@@ -105,8 +105,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Permission $permission)
     {
-        $this->authorize('delete', $role);
+        $this->authorize('delete', $permission);
     }
 }

@@ -2,10 +2,15 @@
 
 namespace Baytek\Laravel\Users;
 
+use Baytek\Laravel\Users\Policies\PermissionPolicy;
+use Baytek\Laravel\Users\Policies\RolePolicy;
 use Baytek\Laravel\Users\Policies\UserPolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
+
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionServiceProvider;
 
 use Route;
@@ -14,6 +19,8 @@ class ServiceProvider extends AuthServiceProvider
 {
 
     protected $policies = [
+        Permission::class => PermissionPolicy::class,
+        Role::class => RolePolicy::class,
         User::class => UserPolicy::class,
     ];
 

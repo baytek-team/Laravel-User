@@ -55,7 +55,7 @@
                         <i class="user icon"></i> Manage Roles
                     </a>
                     {!! new Baytek\Laravel\Menu\Button('Delete', [
-                        'class' => 'ui icon labeled negative button',
+                        'class' => 'ui icon labeled negative button action',
                         'location' => 'user.destroy',
                         'method' => 'delete',
                         'model' => $user,

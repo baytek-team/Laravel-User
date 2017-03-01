@@ -13,9 +13,9 @@
 @section('page.head.menu')
     <div class="ui secondary menu">
         <div class="right item">
-            <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+            <a href="{{ route('permission.index') }}" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
             &nbsp;
-            <a href="" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+            <a href="{{ route('role.index') }}" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
         </div>
     </div>
 @endsection
@@ -42,7 +42,11 @@
                 <tr>
                     <td class="four wide">{{ $user->name }}</td>
                     @foreach ($roles as $role)
-                        <td><input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif /></td>
+                        <td>
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="{{ $role->name }}[{{ $user->id }}]" @if($user->hasRole($role))checked="checked"@endif />
+                            </div>
+                        </td>
                     @endforeach
                 </tr>
             </tbody>
@@ -72,7 +76,11 @@
                     <tr>
                         <td class="four wide">{{ $user->name }}</td>
                         @foreach ($permissions as $permission)
-                            <td><input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif /></td>
+                            <td>
+                                <div class="ui toggle checkbox">
+                                    <input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif />
+                                </div>
+                            </td>
                         @endforeach
                     </tr>
             </tbody>

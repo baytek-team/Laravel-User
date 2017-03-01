@@ -23,6 +23,10 @@ Route::group([
 		'middleware' => ['web']
 	], function () {
 
+	Route::get('user/roles', 'UserRoleController@index')->name('user.role.index');
+    Route::post('user/roles/role-permissions', 'UserRoleController@saveRolePermissions')->name('user.role.save_role_permissions');
+    Route::post('user/roles/user-permissions', 'UserRoleController@saveUserPermissions')->name('user.role.save_user_permissions');
+    Route::post('user/roles/user-roles', 'UserRoleController@saveUserRoles')->name('user.role.save_user_roles');
 	Route::get('user/profile', 'ProfileController@index')->name('user.profile');
 
 	Route::resource('user', 'UserController');
@@ -30,8 +34,6 @@ Route::group([
 	Route::get('user/{user}/roles', 'UserController@roles')->name('user.roles');
 	Route::post('user/{user}/roles', 'UserController@rolesSave')->name('user.roles.save');
 
-	Route::get('roles', 'RoleController@index')->name('roles.index');
-    Route::post('roles/role-permissions', 'RoleController@saveRolePermissions')->name('user.role.save_role_permissions');
-    Route::post('roles/user-permissions', 'RoleController@saveUserPermissions')->name('user.role.save_user_permissions');
-    Route::post('roles/user-roles', 'RoleController@saveUserRoles')->name('user.role.save_user_roles');
+	Route::resource('role', 'RoleController');
+	Route::resource('permission', 'PermissionController');
 });

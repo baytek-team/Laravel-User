@@ -18,19 +18,6 @@ class Role
     public function __construct(User $user)
     {
         $this->user = $user;
-
-        $this->bootRoleRedirection();
-    }
-
-    /**
-     * Here we set the redirect URL to the user class to ensure we are redirecting to the proper location.
-     */
-    private function bootRoleRedirection()
-    {
-        // Set the redirect to
-        if(is_null($this->user->redirectTo)) {
-            $this->user->redirectTo = $this->redirectTo;
-        }
     }
 
     /**

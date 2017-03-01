@@ -12,7 +12,7 @@
 
 @section('content')
 <div id="registration" class="et_pb_column ui container">
-    <form class="ui form" action="{{route('user.update', $user)}}" method="POST">
+    <form class="ui form" action="{{route('user.update')}}" method="POST">
         {{ csrf_field() }}
 
         @include('User::user.form')
