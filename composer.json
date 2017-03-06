@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.6.4",
         "spatie/laravel-permission": "^1.5",
-        "baytek/laravel-menu": "dev-master",
+        "baytek/laravel-menu": "dev-master"
     },
     "minimum-stability": "dev"
 }
