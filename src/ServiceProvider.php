@@ -35,6 +35,8 @@ class ServiceProvider extends AuthServiceProvider
         $this->loadRoutesFrom(__DIR__.'/Routes.php');
         $this->loadMigrationsFrom(__DIR__.'/../resources/Migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/Views', 'User');
+
+        (new UserInstaller)->installCommand();
     }
 
     /**

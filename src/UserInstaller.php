@@ -1,0 +1,57 @@
+<?php
+
+namespace Baytek\Laravel\Users;
+
+use Baytek\Laravel\Content\Installer;
+use Baytek\Laravel\Users\Seeders\AllSeeder;
+use Baytek\Laravel\Users\User;
+use Baytek\Laravel\Users\ServiceProvider;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+use Artisan;
+use DB;
+
+class UserInstaller extends Installer
+{
+    public $name = 'User';
+    protected $provider = ServiceProvider::class;
+    protected $model = User::class;
+    protected $seeder = AllSeeder::class;
+
+    public function beforeInstallation()
+    {
+        $pluginTables = [
+            env('DB_PREFIX', '').'roles',
+            env('DB_PREFIX', '').'permissions',
+        ];
+
+        $shouldPublishPermissions = collect(array_map('reset', DB::select('SHOW TABLES')))
+            ->intersect($pluginTables)
+            ->isEmpty();
+
+
+        if($shouldPublishPermissions) {
+            Artisan::call('vendor:publish', ['--tag' => 'migrations', '--provider' => \Spatie\Permission\PermissionServiceProvider::class]);
+        }
+
+        // Run migration, perhaps we should ask the user if they out like to migrate,
+        Artisan::call('migrate');
+    }
+
+    public function shouldPublish()
+    {
+        return false;
+    }
+
+    public function shouldMigrate()
+    {
+        return false;
+    }
+
+    public function shouldSeed()
+    {
+        return empty(Role::where('name', 'Root')->first());
+    }
+}

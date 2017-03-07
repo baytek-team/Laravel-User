@@ -9,18 +9,24 @@
             <form class="ui form" role="form" method="POST" action="{{ url('/admin/register') }}">
                 {{ csrf_field() }}
 
-                <div class="field{{ $errors->has('first_name') ? ' error' : '' }}">
-                    <label for="first_name" class="screen-reader-text">First Name</label>
-                    <input id="first_name" type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autofocus>
-                </div>
-                <div class="field{{ $errors->has('last_name') ? ' error' : '' }}">
-                    <label for="last_name" class="screen-reader-text">Last Name</label>
-                    <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required autofocus>
+                <div class="field{{ $errors->has('name') ? ' error' : '' }}">
+                    <label for="name" class="screen-reader-text">Name</label>
+                    <input id="name" type="text" class="form-control" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus>
                 </div>
 
                 <div class="field{{ $errors->has('email') ? ' error' : '' }}">
                     <label for="email" class="screen-reader-text">E-Mail Address</label>
                     <input id="email" type="email" class="form-control" name="email" placeholder="E-Mail Address" value="{{ old('email') }}" required>
+                </div>
+
+                <div class="field{{ $errors->has('password') ? ' error' : '' }}">
+                    <label for="password" class="screen-reader-text">Password</label>
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" value="{{ old('password') }}" required autofocus>
+                </div>
+
+                <div class="field{{ $errors->has('password_confirmation') ? ' error' : '' }}">
+                    <label for="password_confirmation" class="screen-reader-text">Confirmation</label>
+                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="password_confirmation" value="{{ old('password_confirmation') }}" required autofocus>
                 </div>
 
                 <div class="field">

@@ -9,7 +9,7 @@
 Route::middleware('role', \Baytek\Laravel\Users\Middleware\RoleMiddleware::class);
 
 Route::group([
-    'middleware' => ['web'],
+    'middleware' => ['web', 'auth'],
     'namespace' => \Baytek\Laravel\Users\Controllers::class,
     'prefix' => 'admin'
 ],
@@ -20,7 +20,7 @@ function ($router) {
 Route::group([
 		'namespace' => '\Baytek\Laravel\Users\Controllers',
 		'prefix' => 'admin',
-		'middleware' => ['web']
+		'middleware' => ['web', 'auth']
 	], function () {
 
 	Route::get('user/roles', 'UserRoleController@index')->name('user.role.index');

@@ -2,7 +2,7 @@
 
 namespace Baytek\Laravel\Users\Controllers\Auth;
 
-use App\User;
+use Baytek\Laravel\Users\User;
 use Baytek\Laravel\Users\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -37,6 +37,16 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('User::register');
     }
 
     /**

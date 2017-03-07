@@ -21,6 +21,6 @@ class PermissionPolicy
      */
     public function before(User $user)
     {
-        return $user->can('Manage Permissions');
+        return $user->hasAnyRole(['Root', 'Administrator']);
     }
 }

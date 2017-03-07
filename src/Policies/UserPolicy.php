@@ -21,7 +21,7 @@ class UserPolicy
      */
     public function before(User $user)
     {
-        return $user->can('Manage Users');
+        return $user->hasAnyRole(['Root', 'Administrator']);
     }
 
     /**
