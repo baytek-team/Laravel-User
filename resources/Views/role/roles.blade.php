@@ -15,7 +15,7 @@
 <div class="ui top attached tabular menu">
     <a class="item active" data-tab="role-permissions">Role Permissions</a>
     <a class="item" data-tab="user-roles">User Roles</a>
-    <a class="item" data-tab="user-permissions">User Permissions</a>
+    {{-- <a class="item" data-tab="user-permissions">User Permissions</a> --}}
 </div>
 <div class="ui bottom attached tab padded segment active" data-tab="role-permissions">
     <form id="role-permissions" action="{{ route('user.role.save_role_permissions') }}" method="POST">
@@ -89,7 +89,7 @@
     </form>
 </div>
 
-<div class="ui bottom attached tab padded segment" data-tab="user-permissions">
+{{-- <div class="ui bottom attached tab padded segment" data-tab="user-permissions">
     <form id="user-permissions" action="{{ route('user.role.save_user_permissions') }}" method="POST">
         {{ csrf_field() }}
         <table class="ui selectable celled very basic table">
@@ -140,6 +140,6 @@ th.rotate > div {
     rotate(290deg);
     width: 20px;
 }
-</style>
+</style> --}}
 
 @endsection

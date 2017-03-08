@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
             Role::create(['name' => ucfirst($role)]);
         }
 
-        foreach(['users', 'roles'] as $permission) {
+        foreach(['role'] as $permission) {
             Permission::create(['name' => ucwords('view '   . $permission)]);
             Permission::create(['name' => ucwords('create ' . $permission)]);
             Permission::create(['name' => ucwords('update ' . $permission)]);

@@ -27,12 +27,12 @@ class UserInstaller extends Installer
             env('DB_PREFIX', '').'permissions',
         ];
 
-        $shouldPublishPermissions = collect(array_map('reset', DB::select('SHOW TABLES')))
+        $shouldPublish = collect(array_map('reset', DB::select('SHOW TABLES')))
             ->intersect($pluginTables)
             ->isEmpty();
 
 
-        if($shouldPublishPermissions) {
+        if($shouldPublish) {
             Artisan::call('vendor:publish', ['--tag' => 'migrations', '--provider' => \Spatie\Permission\PermissionServiceProvider::class]);
         }
 
@@ -48,6 +48,19 @@ class UserInstaller extends Installer
     public function shouldMigrate()
     {
         return false;
+    }
+
+    public function shouldProtect()
+    {
+        foreach(['view', 'create', 'update', 'delete'] as $permission) {
+
+            // If the permission exists in any form do not reseed.
+            if(Permission::where('name', title_case($permission.' '.$this->name))->exists()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function shouldSeed()

@@ -9,7 +9,7 @@
 Route::middleware('role', \Baytek\Laravel\Users\Middleware\RoleMiddleware::class);
 
 Route::group([
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['web'],
     'namespace' => \Baytek\Laravel\Users\Controllers::class,
     'prefix' => 'admin'
 ],

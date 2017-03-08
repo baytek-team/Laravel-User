@@ -67,22 +67,20 @@
             <thead>
                 <tr>
                     <th></th>
-                    @foreach ($permissions as $permission)
-                        <th>{{ $permission->name }}</th>
-                    @endforeach
+                    <th>{{ $user->name }}</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($permissions as $permission)
                     <tr>
-                        <td class="four wide">{{ $user->name }}</td>
-                        @foreach ($permissions as $permission)
-                            <td>
-                                <div class="ui toggle checkbox">
-                                    <input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif />
-                                </div>
-                            </td>
-                        @endforeach
+                        <td class="four wide">{{ $permission->name }}</td>
+                        <td>
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="{{ $permission->name }}[{{ $user->id }}]" @if($user->hasPermissionTo($permission))checked="checked"@endif />
+                            </div>
+                        </td>
                     </tr>
+                @endforeach
             </tbody>
         </table>
         <div class="ui hidden divider"></div>

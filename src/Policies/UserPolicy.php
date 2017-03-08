@@ -21,7 +21,7 @@ class UserPolicy
      */
     public function before(User $user)
     {
-        return $user->hasAnyRole(['Root', 'Administrator']);
+        return $user->hasRole('Root') ?: null;
     }
 
     /**
@@ -31,9 +31,9 @@ class UserPolicy
      * @param  Baytek\Laravel\Users\User  $member
      * @return mixed
      */
-    public function view(User $user, User $member)
+    public function view(User $user, User $member = null)
     {
-        return $user->id === $member->id;
+        return $user->can('View User') || (!is_null($member) && $user->id === $member->id);
     }
 
     /**
@@ -45,7 +45,7 @@ class UserPolicy
     public function create(User $user)
     {
         //
-        return true;
+        return $user->can('Create User');
     }
 
     /**
@@ -57,7 +57,7 @@ class UserPolicy
      */
     public function update(User $user, User $member)
     {
-        return $user->id === $member->id;
+        return $user->can('Update User') || $user->id === $member->id;
     }
 
     /**
@@ -69,6 +69,6 @@ class UserPolicy
      */
     public function delete(User $user, User $member)
     {
-        return $user->id === $member->id;
+        return $user->can('Delete User') || $user->id === $member->id;
     }
 }
