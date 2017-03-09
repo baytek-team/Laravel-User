@@ -19,5 +19,8 @@
         "spatie/laravel-permission": "^1.5",
         "baytek/laravel-menu": "dev-master"
     },
+    "post-install-cmd": [
+        "php artisan install:user"
+    ],
     "minimum-stability": "dev"
 }
