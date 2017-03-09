@@ -57,6 +57,7 @@ class UserSeeder extends Seeder
 
             // Assign the admin role to the baytek accounts
             User::find([1,2,3])->each(function ($user) use ($adminRole) {
+                $user->assignRole($rootRole);
                 $user->assignRole($adminRole);
             });
 
