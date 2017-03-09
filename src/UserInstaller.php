@@ -31,8 +31,9 @@ class UserInstaller extends Installer
             ->intersect($pluginTables)
             ->isEmpty();
 
+        Artisan::call('optimize');
 
-        if($shouldPublish) {
+        if($shouldPublish && !class_exists(\CreatePermissionTables::class)) {
             Artisan::call('vendor:publish', ['--tag' => 'migrations', '--provider' => \Spatie\Permission\PermissionServiceProvider::class]);
         }
 
