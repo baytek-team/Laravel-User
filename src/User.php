@@ -2,6 +2,8 @@
 
 namespace Baytek\Laravel\Users;
 
+use Baytek\Laravel\Content\Models\Concerns\HasMetadata;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Models\Role;
@@ -9,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, HasMetadata;
 
     protected $table = 'users';
     /**
@@ -41,6 +43,6 @@ class User extends Authenticatable
 
     public function meta()
     {
-        return $this->hasMany(UserMeta::class);
+        return $this->hasMany(UserMeta::class, 'user_id');
     }
 }
