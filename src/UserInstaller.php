@@ -43,7 +43,7 @@ class UserInstaller extends Installer
 
     public function shouldPublish()
     {
-        return false;
+        return true;
     }
 
     public function shouldMigrate()

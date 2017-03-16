@@ -36,6 +36,11 @@ class ServiceProvider extends AuthServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../resources/Migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/Views', 'User');
 
+        // Set the path to publish assets for users to extend
+        $this->publishes([
+            __DIR__.'/../resources/Views' => resource_path('views/vendor/user'),
+        ], 'views');
+
         (new UserInstaller)->installCommand();
     }
 
