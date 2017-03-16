@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -36,5 +37,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = encrypt($value);
+    }
+
+    public function meta()
+    {
+        return $this->hasMany(UserMeta::class);
     }
 }
