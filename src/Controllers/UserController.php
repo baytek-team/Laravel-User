@@ -5,6 +5,7 @@ namespace Baytek\Laravel\Users\Controllers;
 use Auth;
 
 use Baytek\Laravel\Users\User;
+use Baytek\Laravel\Users\UserMeta;
 use Baytek\Laravel\Users\Middleware\RootProtection;
 
 use Illuminate\Http\Request;
@@ -86,7 +87,7 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-    return view('User::user.edit', [
+        return view('User::user.edit', [
             'user' => $user,
             'roles' => Role::all(),
             'users' => User::all(),
@@ -121,6 +122,22 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->update($request->all());
+
+        foreach($request->meta as $key => $value) {
+            if($meta = $user->getMetaRecord($key)) {
+                $meta->value = $value;
+                $meta->update();
+            }
+            else {
+                $metaRecord = (new UserMeta([
+                    'language' => \App::getLocale(),
+                    'key' => $key,
+                    'value' => $value
+                ]));
+                $user->meta()->save($metaRecord);
+                $metaRecord->save();
+            }
+        }
 
         return redirect(route('user.index'));
     }
