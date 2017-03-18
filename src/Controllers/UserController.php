@@ -156,4 +156,19 @@ class UserController extends Controller
 
         return redirect(route('user.index'));
     }
+
+    /**
+     * Send a password reset link to a user
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sendPasswordResetLink(User $user)
+    {
+        // Trigger the user was created this will send an email to the user
+        event(new \Baytek\Laravel\Users\Events\SendPasswordResetLink($user));
+
+        // Go to the edit user page in the admin
+        return redirect(route('user.edit', $user));
+    }
 }

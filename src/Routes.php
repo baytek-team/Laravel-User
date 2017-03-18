@@ -30,6 +30,7 @@ Route::group([
 	Route::get('user/profile', 'ProfileController@index')->name('user.profile');
 
 	Route::resource('user', 'UserController');
+  Route::post('user/{user}/password/email', 'UserController@sendPasswordResetLink')->name('user.password.email');
 
 	Route::get('user/{user}/roles', 'UserController@roles')->name('user.roles');
 	Route::post('user/{user}/roles', 'UserController@rolesSave')->name('user.roles.save');
