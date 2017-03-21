@@ -10,7 +10,7 @@ class Administrator extends Role
 	const ROLE = 'Administrator';
 
 	public $redirectTo = [
-		'action' => 'Admin\Controller@getDashboard'
+		'url' => '/admin'
 	];
 
 	public function __construct(User $user)

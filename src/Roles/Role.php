@@ -18,6 +18,12 @@ class Role
     public function __construct(User $user)
     {
         $this->user = $user;
+
+        // Set the redirect to
+        if(is_null($this->user->redirectTo)) {
+            $this->user->redirectTo = !is_null($this->redirectTo) ? $this->redirectTo : '/';
+        }
+
     }
 
     /**
