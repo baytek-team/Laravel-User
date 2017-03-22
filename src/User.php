@@ -83,10 +83,10 @@ class User extends Authenticatable
      * Encrypt the value of the password upon being set. It should not be possible to change an existing users password, they should trigger a password reset.
      * @param mixed $value The password value unencrypted
      */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = encrypt($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = encrypt($value);
+    // }
 
     public function getMetaRecord($key)
     {
