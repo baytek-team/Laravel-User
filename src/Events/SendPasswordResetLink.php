@@ -13,6 +13,8 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 
+use App;
+
 class SendPasswordResetLink
 {
     use InteractsWithSockets, SerializesModels;
@@ -24,9 +26,9 @@ class SendPasswordResetLink
      */
     public function __construct(User $user)
     {
-        $key = $this->app['config']['app.key'];
+        $key = config('app.key');
 
-        if (Str::startsWith($key, 'base64:')) {
+        if (\Str::startsWith($key, 'base64:')) {
             $key = base64_decode(substr($key, 7));
         }
 
