@@ -30,12 +30,20 @@ class Role
      * Get all users of the role type
      * @return Collection Users
      */
-    public static function all()
+    public static function users()
     {
         return User::whereHas('roles', function ($query) {
-                $query->where('roles.name', '=', static::ROLE);
-            })
-            ->get();
+            $query->where('roles.name', '=', static::ROLE);
+        });
+    }
+
+    /**
+     * Get all users of the role type
+     * @return Collection Users
+     */
+    public static function all()
+    {
+        return static::users()->get();
     }
 
     public static function role()
