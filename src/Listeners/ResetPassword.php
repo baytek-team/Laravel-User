@@ -33,7 +33,7 @@ class ResetPassword
         DB::table('password_resets')->insert([
             'email' => $event->user->email,
             'token' => $event->parameters['token'],
-            'created_at' => Carbon::now()->addDays(30)->toDateTimeString(),
+            'created_at' => Carbon::now()->toDateTimeString(),
         ]);
     }
 }
