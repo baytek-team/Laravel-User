@@ -27,7 +27,7 @@
 </div>
 
 <div class="ui bottom attached tab padded segment active" data-tab="user-roles">
-    <form id="user-roles" action="{{ route('user.role.save_user_roles') }}" method="POST">
+    <form id="user-roles" action="{{ route('user.roles.save', $user) }}" method="POST">
         {{ csrf_field() }}
         <table class="ui selectable celled very basic table">
             <thead>
@@ -61,7 +61,7 @@
 </div>
 
 <div class="ui bottom attached tab padded segment" data-tab="user-permissions">
-    <form id="user-permissions" action="{{ route('user.role.save_user_permissions') }}" method="POST">
+    <form id="user-permissions" action="{{ route('user.permissions.save', $user) }}" method="POST">
         {{ csrf_field() }}
         <table class="ui selectable celled very basic table">
             <thead>

@@ -50,11 +50,16 @@ class UserRoleController extends Controller
 		return redirect()->back();
 	}
 
-	public function saveUserRoles(RoleRequest $post)
+	public function saveUserRoles(RoleRequest $post, User $user = null)
 	{
-		User::all()->each(function ($user) {
+		if(is_null($user->id)) {
+			User::all()->each(function ($user) {
+				$user->roles()->detach();
+			});
+		}
+		else {
 			$user->roles()->detach();
-		});
+		}
 
 		foreach($post->request as $role => $users) {
 
@@ -70,11 +75,16 @@ class UserRoleController extends Controller
 		return redirect()->back();
 	}
 
-	public function saveUserPermissions(RoleRequest $post)
+	public function saveUserPermissions(RoleRequest $post, User $user = null)
 	{
-		User::all()->each(function ($user) {
+		if(is_null($user->id)) {
+			User::all()->each(function ($user) {
+				$user->permissions()->detach();
+			});
+		}
+		else {
 			$user->permissions()->detach();
-		});
+		}
 
 		foreach($post->request as $permission => $users) {
 
