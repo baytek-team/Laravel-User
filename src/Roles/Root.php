@@ -13,7 +13,7 @@ class Root extends Role
 	const ROLE = 'Root';
 
 	public $redirectTo = [
-		'url' => '/admin/user'
+		'url' => '/admin'
 	];
 
 	public function __construct(User $user)
