@@ -21,8 +21,13 @@ class RootProtection
      */
     public function handle(Request $request, Closure $next)
     {
+        //If $request->user isn't an object, get it
+        if (isset($request->user) && gettype($request->user) != 'object') {
+            $request->user = User::find($request->user);
+        }
+
         // If you are trying to do something to the root user get out of here!!!
-        if(isset($request->user) && $request->user->id == 1) {
+        if(isset($request) && isset($request->user) && $request->user->id == 1) {
 
             // If you aren't the root user, none shall pass!!!
             if($request->user()->id != 1) {
