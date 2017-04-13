@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
             'name' => 'Root',
             'email' => 'webmaster@baytek.ca',
             'password' => bcrypt('aaanne95'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         // Find the root role
@@ -39,16 +41,22 @@ class UserSeeder extends Seeder
                     'name' => 'Yvon Viger',
                     'email' => 'yvon@baytek.ca',
                     'password' => bcrypt('aaanne95'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
                     'name' => 'Chad Sehn',
                     'email' => 'chad@baytek.ca',
                     'password' => bcrypt('aaanne95'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
                     'name' => 'Sarah Marinoff',
                     'email' => 'sarah@baytek.ca',
                     'password' => bcrypt('aaanne95'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ]
             ]);
 

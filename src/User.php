@@ -97,14 +97,14 @@ class User extends Authenticatable
         return null;
     }
 
-    public function getMeta($key, $default = null)
-    {
-        if($meta = $this->getMetaRecord($key)) {
-            return $meta->value;
-        }
+    // public function getMeta($key, $default = null)
+    // {
+    //     if($meta = $this->getMetaRecord($key)) {
+    //         return $meta->value;
+    //     }
 
-        return $default;
-    }
+    //     return $default;
+    // }
 
     public function meta()
     {
