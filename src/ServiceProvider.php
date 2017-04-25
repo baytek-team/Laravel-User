@@ -57,6 +57,8 @@ class ServiceProvider extends AuthServiceProvider
      */
     public function register()
     {
+        $this->commands($this->commands);
+
         $this->app->register(PermissionServiceProvider::class);
     }
 }
