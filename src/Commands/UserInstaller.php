@@ -1,8 +1,8 @@
 <?php
 
-namespace Baytek\Laravel\Users;
+namespace Baytek\Laravel\Users\Commands;
 
-use Baytek\Laravel\Content\Installer;
+use Baytek\Laravel\Content\Commands\Installer;
 use Baytek\Laravel\Users\Seeders\AllSeeder;
 use Baytek\Laravel\Users\User;
 use Baytek\Laravel\Users\ServiceProvider;

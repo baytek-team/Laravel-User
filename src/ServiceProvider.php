@@ -18,6 +18,14 @@ use Route;
 class ServiceProvider extends AuthServiceProvider
 {
 
+    /**
+     * List of artisan commands provided by this package
+     * @var Array
+     */
+    protected $commands = [
+        Commands\UserInstaller::class,
+    ];
+
     protected $policies = [
         Permission::class => PermissionPolicy::class,
         Role::class => RolePolicy::class,
@@ -40,8 +48,6 @@ class ServiceProvider extends AuthServiceProvider
         $this->publishes([
             __DIR__.'/../resources/Views' => resource_path('views/vendor/user'),
         ], 'views');
-
-        (new UserInstaller)->installCommand();
     }
 
     /**
