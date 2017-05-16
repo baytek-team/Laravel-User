@@ -22,18 +22,21 @@
             <tr>
                 <td>{{ $role->name }}</td>
                 <td class="collapsing right aligned">
-                    <a href="{{ route('role.edit', ['role' => $role]) }}" class="ui icon labeled primary button">
-                        <i class="pencil icon"></i>Edit
-                    </a>
+                    <div class="ui compact text menu">
+                        <a href="{{ route('role.edit', ['role' => $role]) }}" class="item">
+                            <i class="pencil icon"></i>Edit
+                        </a>
 
-                    {!! new Baytek\Laravel\Menu\Button('Delete', [
-                        'class' => 'ui icon labeled negative button action',
-                        'location' => 'role.destroy',
-                        'method' => 'delete',
-                        'model' => $role,
-                        'prepend' => '<i class="delete icon"></i>',
-                        'type' => 'route',
-                    ]) !!}
+                        {!! new Baytek\Laravel\Menu\Button('Delete', [
+                            'class' => 'item action',
+                            'location' => 'role.destroy',
+                            'method' => 'delete',
+                            'model' => $role,
+                            'prepend' => '<i class="delete icon"></i>',
+                            'type' => 'route',
+                            'confirm' => 'Are you sure you want to delete this role?'
+                        ]) !!}
+                    </div>
                 </td>
             </tr>
         @endforeach

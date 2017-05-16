@@ -22,18 +22,21 @@
             <tr>
                 <td>{{ $permission->name }}</td>
                 <td class="collapsing right aligned">
-                    <a href="{{ route('permission.edit', ['permission' => $permission]) }}" class="ui icon labeled primary button">
-                        <i class="pencil icon"></i>Edit
-                    </a>
+                    <div class="ui compact text menu">
+                        <a href="{{ route('permission.edit', ['permission' => $permission]) }}" class="item">
+                            <i class="pencil icon"></i>Edit
+                        </a>
 
-                    {!! new Baytek\Laravel\Menu\Button('Delete', [
-                        'class' => 'ui icon labeled negative button action',
-                        'location' => 'permission.destroy',
-                        'method' => 'delete',
-                        'model' => $permission,
-                        'prepend' => '<i class="delete icon"></i>',
-                        'type' => 'route',
-                    ]) !!}
+                        {!! new Baytek\Laravel\Menu\Button('Delete', [
+                            'class' => 'item action',
+                            'location' => 'permission.destroy',
+                            'method' => 'delete',
+                            'model' => $permission,
+                            'prepend' => '<i class="delete icon"></i>',
+                            'type' => 'route',
+                            'confirm' => 'Are you sure you want to delete this permission?'
+                        ]) !!}
+                    </div>
                 </td>
             </tr>
         @endforeach

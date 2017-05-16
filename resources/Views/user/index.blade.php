@@ -48,20 +48,23 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td class="collapsing right aligned">
-                    <a href="{{ route('user.edit', ['user' => $user]) }}" class="ui icon labeled primary button">
-                        <i class="pencil icon"></i>Edit
-                    </a>
-                    <a class="ui icon labeled button" href="{{ route('user.roles', ['user' => $user]) }}">
-                        <i class="user icon"></i> Manage Roles
-                    </a>
-                    {!! new Baytek\Laravel\Menu\Button('Delete', [
-                        'class' => 'ui icon labeled negative button action',
-                        'location' => 'user.destroy',
-                        'method' => 'delete',
-                        'model' => $user,
-                        'prepend' => '<i class="delete icon"></i>',
-                        'type' => 'route',
-                    ]) !!}
+                    <div class="ui compact text menu">
+                        <a href="{{ route('user.edit', ['user' => $user]) }}" class="item">
+                            <i class="pencil icon"></i>Edit
+                        </a>
+                        <a class="item" href="{{ route('user.roles', ['user' => $user]) }}">
+                            <i class="user icon"></i> Manage Roles
+                        </a>
+                        {!! new Baytek\Laravel\Menu\Button('Delete', [
+                            'class' => 'item action',
+                            'location' => 'user.destroy',
+                            'method' => 'delete',
+                            'model' => $user,
+                            'prepend' => '<i class="delete icon"></i>',
+                            'type' => 'route',
+                            'confirm' => 'Are you sure you want to delete this user?'
+                        ]) !!}
+                    </div>
                 </td>
             </tr>
         @endforeach
