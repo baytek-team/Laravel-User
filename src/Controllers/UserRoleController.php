@@ -44,6 +44,9 @@ class UserRoleController extends Controller
 					->all();
 
 				$roleModel->permissions()->saveMany($permissions);
+
+				//Reset the permission cache, otherwise the changes won't be saved!
+				$roleModel->forgetCachedPermissions();
 			}
 		}
 
