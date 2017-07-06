@@ -5,14 +5,16 @@
 */
 Route::middleware('role', \Baytek\Laravel\Users\Middleware\RoleMiddleware::class);
 
-Route::group([
-    'middleware' => ['web'],
-    'namespace' => \Baytek\Laravel\Users\Controllers::class,
-    'prefix' => 'admin'
-],
-function ($router) {
-    \Auth::routes();
-});
+if(config('auth.skip_auth_routes') !== true) {
+    Route::group([
+        'middleware' => ['web'],
+        'namespace' => \Baytek\Laravel\Users\Controllers::class,
+        'prefix' => 'admin'
+    ],
+    function ($router) {
+        \Auth::routes();
+    });
+}
 
 Route::group([
         'namespace' => '\Baytek\Laravel\Users\Controllers',
