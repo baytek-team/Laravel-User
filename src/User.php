@@ -97,17 +97,18 @@ class User extends Authenticatable
         return null;
     }
 
-    // public function getMeta($key, $default = null)
-    // {
-    //     if($meta = $this->getMetaRecord($key)) {
-    //         return $meta->value;
-    //     }
-
-    //     return $default;
-    // }
+    public function scopeWithMeta($query, $restricted = false)
+    {
+        return $query->with($restricted ? 'restrictedMeta' : 'meta');
+    }
 
     public function meta()
     {
         return $this->hasMany(UserMeta::class, 'user_id');
+    }
+
+    public function restrictedMeta()
+    {
+        return $this->hasMany(UserMeta::class, 'user_id')->withoutGlobalScope('not_restricted');
     }
 }
