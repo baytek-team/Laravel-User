@@ -90,7 +90,7 @@ class User extends Authenticatable
 
     public function getMetaRecord($key)
     {
-        $meta = $this->meta->where('key', $key);
+        $meta = $this->restrictedMeta->where('key', $key);
         if($meta->count()) {
             return $meta->first();
         }
