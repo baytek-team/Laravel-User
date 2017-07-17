@@ -3,7 +3,7 @@
 namespace Baytek\Laravel\Users;
 
 use Baytek\LaravelStatusBit\Statusable;
-use Baytek\LaravelStatusBit\StatusInterface;
+use Baytek\LaravelStatusBit\Interfaces\StatusInterface;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
