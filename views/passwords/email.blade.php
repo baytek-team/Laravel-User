@@ -1,4 +1,4 @@
-@extends('Content::admin')
+@extends('content::admin')
 
 <!-- Main Content -->
 @section('content')

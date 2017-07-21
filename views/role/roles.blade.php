@@ -1,4 +1,4 @@
-@extends('User::role.template')
+@extends('user::role.template')
 
 @section('page.head.menu')
     <div class="ui secondary menu">

@@ -1,4 +1,4 @@
-@extends('User::permission.template')
+@extends('user::permission.template')
 
 @section('content')
 <div id="registration" class="et_pb_column ui container">

@@ -41,12 +41,12 @@ class ServiceProvider extends AuthServiceProvider
     {
         $this->registerPolicies();
         $this->loadRoutesFrom(__DIR__.'/Routes.php');
-        $this->loadMigrationsFrom(__DIR__.'/../resources/Migrations');
-        $this->loadViewsFrom(__DIR__.'/../resources/Views', 'User');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadViewsFrom(__DIR__.'/../views', 'user');
 
         // Set the path to publish assets for users to extend
         $this->publishes([
-            __DIR__.'/../resources/Views' => resource_path('views/vendor/user'),
+            __DIR__.'/../views' => resource_path('views/vendor/user'),
         ], 'views');
     }
 
