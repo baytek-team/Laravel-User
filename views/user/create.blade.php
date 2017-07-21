@@ -15,7 +15,7 @@
     <form class="ui form" action="{{route('user.store')}}" method="POST">
         {{ csrf_field() }}
 
-        @include('User::user.form')
+        @include('user::user.form')
         <div class="ui hidden divider"></div>
         <div class="ui hidden divider"></div>
 

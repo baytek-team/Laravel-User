@@ -5,7 +5,7 @@
     <form class="ui form" action="{{route('role.store')}}" method="POST">
         {{ csrf_field() }}
 
-        @include('User::role.form')
+        @include('user::role.form')
         <div class="ui hidden divider"></div>
         <div class="ui hidden divider"></div>
 

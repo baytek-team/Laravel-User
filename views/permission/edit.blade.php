@@ -6,7 +6,7 @@
         {{ csrf_field() }}
         {{ method_field('PUT') }}
 
-        @include('User::permission.form')
+        @include('user::permission.form')
         <div class="ui hidden divider"></div>
         <div class="ui hidden divider"></div>
 

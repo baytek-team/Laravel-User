@@ -5,7 +5,7 @@
     <form class="ui form" action="{{route('permission.store')}}" method="POST">
         {{ csrf_field() }}
 
-        @include('User::permission.form')
+        @include('user::permission.form')
         <div class="ui hidden divider"></div>
         <div class="ui hidden divider"></div>
 
