@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('User::login');
+        return view('user::login');
     }
 
     /**
