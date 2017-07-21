@@ -22,7 +22,7 @@ class RoleController extends Controller
     {
         $this->authorize('view', Role::class);
 
-        return view('User::role.index', [
+        return view('user::role.index', [
             'roles' => Role::all(),
         ]);
     }
@@ -36,7 +36,7 @@ class RoleController extends Controller
     {
         $this->authorize('create', Role::class);
 
-        return view('User::role.create', [
+        return view('user::role.create', [
             'role' => (new Role()),
         ]);
     }
@@ -78,7 +78,7 @@ class RoleController extends Controller
     {
         $this->authorize('update', $role);
 
-        return view('User::role.edit', [
+        return view('user::role.edit', [
             'role' => $role,
         ]);
     }

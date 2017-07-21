@@ -18,7 +18,7 @@ class UserRoleController extends Controller
 
 	public function index()
 	{
-		return view('User::role.roles', [
+		return view('user::role.roles', [
 			'roles' => Role::all(),
 			'users' => User::all(),
 			'permissions' => Permission::all(),

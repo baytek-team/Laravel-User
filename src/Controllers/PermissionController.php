@@ -22,7 +22,7 @@ class PermissionController extends Controller
     {
         $this->authorize('view', Permission::class);
 
-        return view('User::permission.index', [
+        return view('user::permission.index', [
             'permissions' => Permission::all(),
         ]);
     }
@@ -36,7 +36,7 @@ class PermissionController extends Controller
     {
         $this->authorize('create', Permission::class);
 
-        return view('User::permission.create', [
+        return view('user::permission.create', [
             'permission' => (new Permission()),
         ]);
     }
@@ -78,7 +78,7 @@ class PermissionController extends Controller
     {
         $this->authorize('update', $permission);
 
-        return view('User::permission.edit', [
+        return view('user::permission.edit', [
             'permission' => $permission,
         ]);
     }
