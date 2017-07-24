@@ -16,6 +16,7 @@ use DB;
 class UserInstaller extends Installer
 {
     public $name = 'User';
+    protected $protected = ['User'];
     protected $provider = ServiceProvider::class;
     protected $model = User::class;
     protected $seeder = AllSeeder::class;
@@ -53,11 +54,13 @@ class UserInstaller extends Installer
 
     public function shouldProtect()
     {
-        foreach(['view', 'create', 'update', 'delete'] as $permission) {
+        foreach ($this->protected as $model) {
+            foreach(['view', 'create', 'update', 'delete'] as $permission) {
 
-            // If the permission exists in any form do not reseed.
-            if(Permission::where('name', title_case($permission.' '.$this->name))->exists()) {
-                return false;
+                // If the permission exists in any form do not reseed.
+                if(Permission::where('name', title_case($permission.' '.$model))->exists()) {
+                    return false;
+                }
             }
         }
 
