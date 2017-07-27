@@ -40,9 +40,18 @@ class ServiceProvider extends AuthServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        $this->loadRoutesFrom(__DIR__.'/Routes.php');
+
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadViewsFrom(__DIR__.'/../views', 'user');
+
+        $this->publishes([
+            __DIR__.'/../config/user.php' => config_path('user.php'),
+        ], 'config');
+
+        // Publish routes to the App
+        $this->publishes([
+            __DIR__.'/../src/Routes' => base_path('routes'),
+        ], 'routes');
 
         // Set the path to publish assets for users to extend
         $this->publishes([
@@ -59,6 +68,7 @@ class ServiceProvider extends AuthServiceProvider
     {
         $this->commands($this->commands);
 
+        $this->app->register(RouteServiceProvider::class);
         $this->app->register(PermissionServiceProvider::class);
     }
 }
