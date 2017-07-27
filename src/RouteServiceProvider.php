@@ -3,9 +3,9 @@
 namespace Baytek\Laravel\Users;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as SomeServiceProvider;
 
-class RouteServiceProvider extends ServiceProvider
+class RouteServiceProvider extends SomeServiceProvider
 {
     /**
      * This namespace is applied to your controller routes.
