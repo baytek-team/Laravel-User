@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        foreach(['root', 'administrator', 'editor', 'member'] as $role) {
+        foreach(['root', 'administrator', 'editor'] as $role) {
             Role::create(['name' => ucfirst($role)]);
         }
 
