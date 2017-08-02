@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-<table class="ui selectable table">
+<table class="ui selectable very basic table">
     <thead>
         <tr>
             <th>Name</th>

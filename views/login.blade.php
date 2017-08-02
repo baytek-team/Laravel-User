@@ -4,7 +4,7 @@
 
 <div class="ui centered grid">
     <div class="sixteen wide tablet ten wide computer column">
-        <div class="ui very padded segment">
+        {{-- <div class="ui very padded segment"> --}}
             <h1 class="ui header">Login</h1>
             <form class="ui form" role="form" method="POST" action="{{ url('/admin/login') }}">
                 {{ csrf_field() }}
@@ -31,7 +31,7 @@
                     <a href="{{ url('/admin/password/reset') }}">Forgot Your Password?</a>
                 </div>
             </form>
-        </div>
+        {{-- </div> --}}
     </div>
 </div>
 <div class="ui hidden divider"></div>
