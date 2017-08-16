@@ -4,8 +4,13 @@
     <h1 class="ui header">
         <i class="user icon"></i>
         <div class="content">
-            User Management
-            <div class="sub header">Manage the users of the claims application.</div>
+            Users
+            <div class="sub header">
+                Sweet dreams are made of this <br />
+                Who am I to disagree<br />
+                Travel the world and the seven seas<br />
+                Everybody looking for something<br />
+            </div>
         </div>
     </h1>
 @endsection
@@ -53,7 +58,7 @@
                             <i class="pencil icon"></i>Edit
                         </a>
                         <a class="item" href="{{ route('user.roles', ['user' => $user]) }}">
-                            <i class="user icon"></i> Manage Roles
+                            <i class="protect icon"></i> Roles
                         </a>
                         {!! new Baytek\Laravel\Menu\Button('Delete', [
                             'class' => 'item action',

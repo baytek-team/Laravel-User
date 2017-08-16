@@ -5,7 +5,7 @@
         <i class="privacy icon"></i>
         <div class="content">
             Permission Management
-            <div class="sub header">Manage the system permissions.</div>
+            <div class="sub header">God does not play dice with the universe.</div>
         </div>
     </h1>
 @endsection

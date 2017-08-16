@@ -13,9 +13,9 @@
 @section('page.head.menu')
     <div class="ui secondary menu">
         <div class="right item">
-            <a href="{{ route('permission.index') }}" class="ui icon labeled button"><i class="save icon"></i> Manage Permissions</a>
+            <a href="{{ route('permission.index') }}" class="ui icon labeled button"><i class="save icon"></i> Permissions</a>
             &nbsp;
-            <a href="{{ route('role.index') }}" class="ui icon labeled button"><i class="save icon"></i> Manage Roles</a>
+            <a href="{{ route('role.index') }}" class="ui icon labeled button"><i class="save icon"></i> Roles</a>
         </div>
     </div>
 @endsection
