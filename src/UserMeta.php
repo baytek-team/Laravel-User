@@ -44,7 +44,7 @@ class UserMeta extends Model implements StatusInterface
         parent::boot();
 
         static::addGlobalScope('not_restricted', function (Builder $builder) {
-            $builder->withStatus($builder->getModel()->table, ['exclude' => [self::RESTRICTED]]);
+            $builder->withStatus(['exclude' => [self::RESTRICTED]]);
         });
     }
 
