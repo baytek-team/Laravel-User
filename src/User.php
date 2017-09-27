@@ -26,6 +26,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * List of fields which should be cast when rendering JSON
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'int'
+    ];
+
+    /**
      * Variable used to store the metadata fields while the user is saving,
      * @var array
      */
@@ -79,9 +87,16 @@ class User extends Authenticatable
 
         // After the model has been saved.
         self::created(function ($model) {
+
             // Check if there is any metadata to save.
             if(property_exists($model, 'metadata')) {
                 $model->saveMetadata($model->metadataAttributes);
+            }
+
+            if(property_exists($model, 'roles')) {
+                foreach($model->roles as $role) {
+                    $model->assignRole($role::ROLE);
+                }
             }
         });
 
@@ -144,14 +159,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Encrypt the value of the password upon being set. It should not be possible to change an existing users password, they should trigger a password reset.
-     * @param mixed $value The password value unencrypted
+     * Get a user metadata record
+     * @param  string $key The key of the metadata we'd like to get
+     * @return mixed       The value of metadata record
      */
-    // public function setPasswordAttribute($value)
-    // {
-    //     $this->attributes['password'] = encrypt($value);
-    // }
-
     public function getMetaRecord($key)
     {
         $meta = $this->restrictedMeta->where('key', $key);
@@ -161,27 +172,41 @@ class User extends Authenticatable
         return null;
     }
 
+    /**
+     * A user may have multiple roles.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeWithMeta($query, $restricted = false)
     {
         return $query->with($restricted ? 'restrictedMeta' : 'meta');
     }
 
+    /**
+     * A user may have metadata.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function meta()
     {
         return $this->hasMany(UserMeta::class, 'user_id');
     }
 
+    /**
+     * A user may have restricted metadata.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function restrictedMeta()
     {
         return $this->hasMany(UserMeta::class, 'user_id')->withoutGlobalScope('not_restricted');
     }
 
-
     /**
      * Save the metadata for this model
-     * @param  mixed $key   Either
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * @param  mixed $key    Either array or metadata key
+     * @param  mixed $value  Optional value for the metadata
+     * @return void
      */
     public function saveMetadata($key, $value = null)
     {
