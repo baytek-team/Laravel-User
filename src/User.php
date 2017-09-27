@@ -21,9 +21,20 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email'
+        'email',
+        'status'
     ];
 
+    /**
+     * Variable used to store the metadata fields while the user is saving,
+     * @var array
+     */
+    protected $metadataAttributes = [];
+
+    /**
+     * Location where the user is redirect to after they log in.
+     * @var string
+     */
     public $redirectTo;
 
     /**
@@ -35,6 +46,59 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * The constructor method of the model.
+     *
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        // Fill the fillable array with metadata
+        if(property_exists($this, 'metadata')) {
+            $this->fillable(array_merge($this->fillable, $this->metadata));
+        }
+
+        parent::__construct($attributes);
+    }
+
+    /**
+     * Boot method of the model
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            if(property_exists($model, 'metadata')) {
+                $model->metadataAttributes = collect($model->attributes)->only($model->metadata)->all();
+                $model->attributes = collect($model->attributes)->except($model->metadata)->all();
+            }
+        });
+
+        // After the model has been saved.
+        self::created(function ($model) {
+            // Check if there is any metadata to save.
+            if(property_exists($model, 'metadata')) {
+                $model->saveMetadata($model->metadataAttributes);
+            }
+        });
+
+        self::updating(function ($model) {
+            if(property_exists($model, 'metadata')) {
+                $model->metadataAttributes = collect($model->attributes)->only($model->metadata)->all();
+                $model->attributes = collect($model->attributes)->except($model->metadata)->all();
+            }
+        });
+
+        self::updated(function ($model) {
+            // Check if there is any metadata to save.
+            if(property_exists($model, 'metadata')) {
+                $model->saveMetadata($model->metadataAttributes);
+            }
+        });
+    }
 
     /**
      * Attach the user role class to the user
@@ -110,5 +174,51 @@ class User extends Authenticatable
     public function restrictedMeta()
     {
         return $this->hasMany(UserMeta::class, 'user_id')->withoutGlobalScope('not_restricted');
+    }
+
+
+    /**
+     * Save the metadata for this model
+     * @param  mixed $key   Either
+     * @param  [type] $value [description]
+     * @return [type]        [description]
+     */
+    public function saveMetadata($key, $value = null)
+    {
+        if(is_string($key)) {
+            $set = collect([$key => $value]);
+        }
+        else if(is_array($key)) {
+            $set = collect($key);
+        }
+        else if(is_object($key) && $key instanceof Collection) {
+            $set = $key;
+        }
+
+        $set->each(function ($value, $key) {
+
+            // Check to see if the metadata already exists
+            $metadata = UserMeta::where([
+                'user_id' => $this->id,
+                'language' => \App::getLocale(),
+                'key' => $key
+            ])->get();
+
+            if($metadata->count()) {
+                $metadata->first()->value = $value;
+                $metadata->first()->save();
+            }
+            else {
+                $meta = (new UserMeta([
+                    'user_id' => $this->id,
+                    'key' => $key,
+                    'language' => \App::getLocale(),
+                    'value' => $value,
+                ]));
+
+                $meta->save();
+                $this->meta()->save($meta);
+            }
+        });
     }
 }
