@@ -13,7 +13,18 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles, HasMetadata;
 
+    /**
+     * Table name used to select users
+     * @var string
+     */
     protected $table = 'users';
+
+    /**
+     * List of roles to be assigned when the user model is saved.
+     * @var array
+     */
+    protected $roles = [];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -93,10 +104,8 @@ class User extends Authenticatable
                 $model->saveMetadata($model->metadataAttributes);
             }
 
-            if(property_exists($model, 'roles')) {
-                foreach($model->roles as $role) {
-                    $model->assignRole($role::ROLE);
-                }
+            foreach($model->getRoles() as $role) {
+                $model->assignRole($role::ROLE);
             }
         });
 
@@ -113,6 +122,18 @@ class User extends Authenticatable
                 $model->saveMetadata($model->metadataAttributes);
             }
         });
+
+        static::addGlobalScope(new Scopes\RoleScope);
+    }
+
+
+    /**
+     * Get the list of roles
+     * @return array List of roles
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 
     /**
