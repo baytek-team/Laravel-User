@@ -23,7 +23,7 @@ class User extends Authenticatable
      * List of roles to be assigned when the user model is saved.
      * @var array
      */
-    protected $roles = [];
+    protected $assignRoles = [];
 
     /**
      * The attributes that are mass assignable.
@@ -133,7 +133,7 @@ class User extends Authenticatable
      */
     public function getRoles()
     {
-        return $this->roles;
+        return $this->assignRoles;
     }
 
     /**

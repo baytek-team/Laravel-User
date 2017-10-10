@@ -23,7 +23,6 @@ class Role
         if(is_null($this->user->redirectTo)) {
             $this->user->redirectTo = !is_null($this->redirectTo) ? $this->redirectTo : '/';
         }
-
     }
 
     /**
