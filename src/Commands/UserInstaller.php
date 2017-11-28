@@ -32,11 +32,11 @@ class UserInstaller extends Installer
             ->intersect($pluginTables)
             ->isEmpty();
 
-        Artisan::call('optimize');
+        // Artisan::call('optimize');
 
-        if($shouldPublish && !class_exists(\CreatePermissionTables::class)) {
-            Artisan::call('vendor:publish', ['--tag' => 'migrations', '--provider' => \Spatie\Permission\PermissionServiceProvider::class]);
-        }
+        // if ($shouldPublish && !class_exists(\CreatePermissionTables::class)) {
+        //     Artisan::call('vendor:publish', ['--tag' => 'migrations', '--provider' => \Spatie\Permission\PermissionServiceProvider::class]);
+        // }
 
         // Run migration, perhaps we should ask the user if they out like to migrate,
         Artisan::call('migrate');
@@ -55,10 +55,10 @@ class UserInstaller extends Installer
     public function shouldProtect()
     {
         foreach ($this->protected as $model) {
-            foreach(['view', 'create', 'update', 'delete'] as $permission) {
+            foreach (['view', 'create', 'update', 'delete'] as $permission) {
 
                 // If the permission exists in any form do not reseed.
-                if(Permission::where('name', title_case($permission.' '.$model))->exists()) {
+                if (Permission::where('name', title_case($permission.' '.$model))->exists()) {
                     return false;
                 }
             }
