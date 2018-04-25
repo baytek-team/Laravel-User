@@ -19,6 +19,13 @@
         "spatie/laravel-permission": "^1.5",
         "baytek/laravel-menu": "1.1.*"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Baytek\\Laravel\\Users\\ServiceProvider"
+            ]
+        }
+    },
     "post-install-cmd": [
         "php artisan install:user"
     ],
