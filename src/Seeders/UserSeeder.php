@@ -35,6 +35,13 @@ class UserSeeder extends Seeder
         // Assign all permissions to Root Role
         $rootRole->permissions()->saveMany(Permission::all());
 
+        // Find the admin role
+        $adminRole = Role::findByName('Administrator');
+
+        // Assign all permissions to admin Role
+        $adminRole->permissions()->saveMany(Permission::all());
+
+        //Seed baytek users
         if(!in_array(config('app.env'), ['prod', 'production', 'live'])) {
             DB::table('users')->insert([
                 [
@@ -60,16 +67,12 @@ class UserSeeder extends Seeder
                 ]
             ]);
 
-            // Find the admin role
-            $adminRole = Role::findByName('Administrator');
+            
 
             // Assign the admin role to the baytek accounts
             User::find([2,3,4])->each(function ($user) use ($adminRole, $rootRole) {
                 $user->assignRole(['Root', 'Administrator']);
             });
-
-            // Assign all permissions to admin Role
-            $adminRole->permissions()->saveMany(Permission::all());
         }
     }
 }
