@@ -30,6 +30,12 @@ class ResetPassword
      */
     public function handle($event)
     {
+        //First remove any existing password resets for this email
+        DB::table('password_resets')
+            ->where('email', $event->user->email)
+            ->delete();
+
+        //Now insert a new password reset record
         DB::table('password_resets')->insert([
             'email' => $event->user->email,
             'token' => bcrypt($event->parameters['token']),
