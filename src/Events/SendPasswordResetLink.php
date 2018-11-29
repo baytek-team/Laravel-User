@@ -33,7 +33,7 @@ class SendPasswordResetLink
         }
 
         $this->type = 'UserPasswordResetLink';
-        $this->title = 'Reset Password for '.config('app.name');
+        $this->title = ___('Reset Password for ').config('app.name');
         $this->user = $user;
         $this->parameters = [
             'token' => hash_hmac('sha256', Str::random(40), $key)
