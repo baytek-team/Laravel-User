@@ -38,6 +38,12 @@ class RouteServiceProvider extends SomeServiceProvider
             $this->mapApiRoutes();
             $this->mapWebRoutes();
         }
+
+        if(config('member.routes.enabled')) {
+            $this->mapMemberAdminRoutes();
+            $this->mapMemberApiRoutes();
+            $this->mapMemberWebRoutes();
+        }
     }
 
     /**
@@ -86,6 +92,60 @@ class RouteServiceProvider extends SomeServiceProvider
     protected function mapWebRoutes()
     {
         $routes = 'routes/web/user.php';
+        if(file_exists(base_path($routes))){
+            Route::middleware('web')
+                 ->namespace(Controllers::class)
+                 ->group(base_path($routes));
+        }
+    }
+
+
+    /**
+     * Define the "admin" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapMemberAdminRoutes()
+    {
+        $routes = 'routes/admin/member.php';
+        if(file_exists(base_path($routes))){
+            Route::prefix('admin') //Just use the admin prefix, so we can properly define the resource routes
+                 ->middleware(['web', 'auth'])
+                 ->namespace(Controllers::class)
+                 ->group(base_path($routes));
+        }
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapMemberApiRoutes()
+    {
+        $routes = 'routes/api/member.php';
+        if(file_exists(base_path($routes))){
+            Route::prefix('api/members')
+                 ->middleware(['api', 'auth'])
+                 ->namespace(Controllers\Api::class)
+                 ->group(base_path($routes));
+        }
+    }
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapMemberWebRoutes()
+    {
+        $routes = 'routes/web/member.php';
         if(file_exists(base_path($routes))){
             Route::middleware('web')
                  ->namespace(Controllers::class)

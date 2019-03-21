@@ -1,3 +1,17 @@
+@section('page.head.menu')
+    @if($user->id)
+        @button(___('Send Password Reset Link'), [
+            'method' => 'post',
+            'location' => 'member.password.email',
+            'type' => 'route',
+            'class' => 'ui action button',
+            'prepend' => '<i class="mail icon"></i>',
+            'model' => $user,
+            //'confirm' => ___('Are you sure you want to send a reset password email?')
+        ])
+    @endif
+@endsection
+
 <div class="one fields">
     <div class="sixteen wide field{{ $errors->has('name') ? ' error' : '' }}">
         <label for="name">Name</label>
@@ -11,29 +25,15 @@
     </div>
 
 </div>
-<div class="one fields">
+<div class="two fields">
     <div class="sixteen wide field{{ $errors->has('password') ? ' error' : '' }}">
         <label for="password">Password</label>
-        <input type="text" id="password" name="password" placeholder="Password" value="{{ old('password', $user->password) }}">
+        <input type="password" id="password" name="password" placeholder="Password">
+    </div>
+
+    <div class="sixteen wide field{{ $errors->has('password_confirmation') ? ' error' : '' }}">
+        <label for="password_confirmation">Password Confirmation</label>
+        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password">
     </div>
 </div>
-
-
-
-{{--
-<div class="field">
-    <label for="password">Password</label>
-    {!! Menu::form(
-        ['Send Password Reset Link' => [
-            'action' => 'Admin\UserController@sendUserPasswordResetLink',
-            'method' => 'POST',
-            'class' => 'ui button',
-            'prepend' => '<i class="mail icon"></i>',
-            'confirm' => 'Are you sure you want to send a reset password email: '.$user->first_name.' '.$user->last_name.'?',
-        ]],
-        $user)
-    !!}
-</div>
---}}
-
 

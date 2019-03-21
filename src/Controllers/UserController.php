@@ -4,9 +4,10 @@ namespace Baytek\Laravel\Users\Controllers;
 
 use Auth;
 
+use Baytek\Laravel\Users\Middleware\RootProtection;
+use Baytek\Laravel\Users\Requests\UserRequest;
 use Baytek\Laravel\Users\User;
 use Baytek\Laravel\Users\UserMeta;
-use Baytek\Laravel\Users\Middleware\RootProtection;
 
 use Illuminate\Http\Request;
 
@@ -56,7 +57,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $this->authorize('create', User::class);
 
@@ -117,27 +118,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $this->authorize('update', $user);
 
-        $user->update($request->all());
-
-        foreach($request->meta as $key => $value) {
-            if($meta = $user->getMetaRecord($key)) {
-                $meta->value = $value;
-                $meta->update();
-            }
-            else {
-                $metaRecord = (new UserMeta([
-                    'language' => \App::getLocale(),
-                    'key' => $key,
-                    'value' => $value
-                ]));
-                $user->meta()->save($metaRecord);
-                $metaRecord->save();
-            }
+        if(!empty($request->input('password'))) {
+            $user->password = bcrypt($request->input('password'));
         }
+
+        $user->update($request->all());
 
         return redirect(route('user.index'));
     }

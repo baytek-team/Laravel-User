@@ -6,10 +6,7 @@
         <div class="content">
             Users
             <div class="sub header">
-                Sweet dreams are made of this <br />
-                Who am I to disagree<br />
-                Travel the world and the seven seas<br />
-                Everybody looking for something<br />
+                God is jealous of your powers here. Use them wisely.
             </div>
         </div>
     </h1>

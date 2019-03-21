@@ -5,13 +5,39 @@
         <i class="user icon"></i>
         <div class="content">
             User Management
-            <div class="sub header">Manage the users of the claims application.</div>
+            <div class="sub header">
+                Manage the users of the claims application.
+
+                <div class="warning message">
+
+                </div>
+            </div>
         </div>
     </h1>
 @endsection
 
+
+@section('outer-content')
+    <div class="ui icon warning message">
+        <i class="fire extinguisher icon"></i>
+        <div class="content">
+            <div class="header">
+                This is dangerous
+            </div>
+            <p>
+                Be aware that changing this information may severely damage the system. <br>
+                <ul>
+                    <li>Changing the users password may confuse the user</li>
+                    <li>Changing email addresses can have huge ramifications</li>
+                    <li>You are root, thus you have great power</li>
+                </ul>
+                <strong>THINK BEFORE ACTING. YOU ARE RESPONSIBLE FOR ALL DAMAGES!</strong>
+            </p>
+        </div>
+    </div>
+@endsection
+
 @section('content')
-<div id="registration" class="et_pb_column ui container">
     <form class="ui form" action="{{route('user.update', $user)}}" method="POST">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
@@ -24,11 +50,8 @@
         <div class="field actions">
             <a class="ui button" href="{{ route('user.index') }}">Cancel</a>
             <button type="submit" class="ui right floated primary button">
-                Update User Information
+                Update User
             </button>
         </div>
-
     </form>
-</div>
-
 @endsection

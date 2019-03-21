@@ -70,5 +70,6 @@ class ServiceProvider extends AuthServiceProvider
 
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(PermissionServiceProvider::class);
+        $this->app->register(MemberServiceProvider::class);
     }
 }

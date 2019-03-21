@@ -23,7 +23,7 @@
         <div class="field actions">
             <a class="ui button" href="{{ route('user.index') }}">Cancel</a>
             <button type="submit" class="ui right floated primary button">
-                Update User Information
+                Create User
             </button>
         </div>
 

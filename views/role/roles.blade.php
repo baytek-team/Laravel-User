@@ -5,7 +5,10 @@
         <i class="table icon"></i>
         <div class="content">
             Permission Matrix
-            <div class="sub header">It means fasten your seat belt Dorothy, <br>'cause Kansas is going bye-bye.</div>
+            <div class="sub header">
+                <q>It means fasten your seat belt Dorothy, 'cause Kansas is going bye-bye.</q><br>
+                <cite>Cypher</cite>
+            </div>
         </div>
     </h1>
 @endsection
