@@ -64,6 +64,8 @@ class UserController extends Controller
         $user = new User($request->all());
         $user->save();
 
+        event(new UserEvent($user), 'created');
+
         return redirect(route('user.index'));
     }
 
@@ -128,6 +130,8 @@ class UserController extends Controller
 
         $user->update($request->all());
 
+        event(new UserEvent($user), 'updated');
+
         return redirect(route('user.index'));
     }
 
@@ -142,6 +146,8 @@ class UserController extends Controller
         $this->authorize('delete', $user);
 
         $user->delete();
+
+        event(new UserEvent($user), 'deleted');
 
         return redirect(route('user.index'));
     }

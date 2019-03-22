@@ -2,6 +2,7 @@
 
 namespace Baytek\Laravel\Users\Events;
 
+use Illuminate\Support\Str;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -25,6 +26,19 @@ class MemberCreatedEvent implements ShouldBroadcast
     {
         $this->user = $user;
         $this->params = $params;
+
+        $key = config('app.key');
+
+        if (Str::startsWith($key, 'base64:')) {
+            $key = base64_decode(substr($key, 7));
+        }
+
+        $this->type = 'UserWelcome';
+        $this->title = ___('Account creation for ').___(config('app.name'));
+        $this->user = $user;
+        $this->parameters = [
+            'token' => hash_hmac('sha256', Str::random(40), $key)
+        ];
     }
 
     /**

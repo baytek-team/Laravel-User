@@ -3,6 +3,7 @@
 namespace Baytek\Laravel\Users\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MemberRequest extends FormRequest
 {
@@ -24,7 +25,12 @@ class MemberRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'           => 'sometimes|required|email|max:255',
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($this->member?$this->member->id:null, 'id')
+            ],
             'meta.first_name' => 'required|max:127',
             'meta.last_name'  => 'required|max:127',
             'meta.home_phone' => 'max:255',

@@ -61,6 +61,7 @@ class MemberServiceProvider extends AuthServiceProvider
         $this->commands($this->commands);
 
         // $this->app->register(RouteServiceProvider::class);
+
         $this->app->register(EventServiceProvider::class);
         $this->app->register(\Intervention\Image\ImageServiceProvider::class);
     }

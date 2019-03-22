@@ -12,9 +12,9 @@ class UserNotificationSubscriber
     /**
      * Handle user login events.
      */
-    public function create($event)
+    public function handle($event)
     {
-        // dump('Content Event Fires');
+        // $event->user
     }
 
     /**
@@ -47,7 +47,7 @@ class UserNotificationSubscriber
     {
         $events->listen(
             UserEvent::class,
-            static::class.'@create'
+            static::class.'@handle'
         );
 
         $events->listen(

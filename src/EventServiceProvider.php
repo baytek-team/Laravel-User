@@ -13,7 +13,14 @@ class EventServiceProvider extends Provider
      * @var array
      */
     protected $listen = [
-        //Events and listeners
+        'Baytek\Laravel\Users\Events\SendPasswordResetLink' => [
+            'Baytek\Laravel\Users\Listeners\ResetPassword',
+            'Baytek\Laravel\Users\Listeners\SendEmail',
+        ],
+        'Baytek\Laravel\Users\Events\MemberCreatedEvent' => [
+            'Baytek\Laravel\Users\Listeners\ResetPassword',
+            'Baytek\Laravel\Users\Listeners\SendEmail',
+        ],
     ];
 
     /**

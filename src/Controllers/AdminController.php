@@ -128,11 +128,8 @@ class AdminController extends Controller
         // $user = User::find($member);
         $member->assignRole($memberRole);
 
-        // Trigger the user was created this will send an email to the user
-        // event(new RegistrationConfirmation($user));
-
         // Update the cache
-        event(new UserEvent($member));
+        event(new UserEvent($member), 'created');
 
         // Advertise the new member to anyone who might be interested
         event(new MemberCreatedEvent($member, $request->all()));
@@ -214,7 +211,7 @@ class AdminController extends Controller
         }
 
         // Update the cache
-        event(new UserEvent($user));
+        event(new UserEvent($user), 'updated');
 
         flash('Member Updated');
 
@@ -327,7 +324,7 @@ class AdminController extends Controller
         $member->onBit(Member::APPROVED)->update();
 
         // Update the cache
-        event(new UserEvent($member));
+        event(new UserEvent($member), 'approved');
 
         flash('Member Approved');
 
