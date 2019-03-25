@@ -24,7 +24,7 @@
                 <td class="collapsing right aligned">
                     <div class="ui compact text menu">
                         <a href="{{ route('role.edit', ['role' => $role]) }}" class="item">
-                            <i class="pencil icon"></i>Edit
+                            <i class="fas fa-edit icon"></i>Edit
                         </a>
 
                         {!! new Baytek\Laravel\Menu\Button('Delete', [

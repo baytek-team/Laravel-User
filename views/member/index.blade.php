@@ -3,7 +3,7 @@
 @section('page.head.menu')
     <div class="ui secondary menu contextual">
         <div class="header item">
-            <i class="filter icon"></i> {{ ___('Filter By') }}
+            <i class="fas fa-filter icon"></i> {{ ___('Filter By') }}
         </div>
         <a class="item @if($filter && $filter == 'active') active @endif" href="{{ route('members.index') }}">{{ ___('Active') }}</a>
         <a class="item @if($filter && $filter == 'pending') active @endif" href="{{ route('members.pending') }}">{{ ___('Pending') }}</a>
@@ -48,13 +48,13 @@
                         <div class="ui text compact menu">
                             @can('update', $member)
                             <a href="{{ route('members.edit', ['member' => $member]) }}" class="item">
-                                <i class="pencil icon"></i> {{-- {{ ___('Edit') }} --}}
+                                <i class="fas fa-edit icon"></i> {{-- {{ ___('Edit') }} --}}
                             </a>
                             @endcan
 
                             @if (Auth::user()->hasRole([\Baytek\Laravel\Users\Roles\Root::ROLE]))
                                 <a class="item" href="{{ route('user.roles', ['user' => $member]) }}">
-                                    <i class="user icon"></i>{{--  {{ ___('Roles') }} --}}
+                                    <i class="fas fa-user-tag icon"></i>{{--  {{ ___('Roles') }} --}}
                                 </a>
                             @endif
 

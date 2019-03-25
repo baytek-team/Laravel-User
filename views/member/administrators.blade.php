@@ -44,7 +44,7 @@
                     <div class="ui text compact menu">
                         @can('Update Member')
                         <a href="{{ route('members.edit', ['member' => $member]) }}" class="item">
-                            <i class="pencil icon"></i> {{ ___('Edit') }}
+                            <i class="fas fa-edit icon"></i> {{ ___('Edit') }}
                         </a>
                         @endcan
 

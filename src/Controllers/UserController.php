@@ -64,7 +64,7 @@ class UserController extends Controller
         $user = new User($request->all());
         $user->save();
 
-        event(new UserEvent($user), 'created');
+        event(new UserEvent($user));
 
         return redirect(route('user.index'));
     }
@@ -130,7 +130,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        event(new UserEvent($user), 'updated');
+        event(new UserEvent($user));
 
         return redirect(route('user.index'));
     }
@@ -147,7 +147,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        event(new UserEvent($user), 'deleted');
+        event(new UserEvent($user));
 
         return redirect(route('user.index'));
     }

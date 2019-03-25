@@ -129,7 +129,7 @@ class AdminController extends Controller
         $member->assignRole($memberRole);
 
         // Update the cache
-        event(new UserEvent($member), 'created');
+        event(new UserEvent($member));
 
         // Advertise the new member to anyone who might be interested
         event(new MemberCreatedEvent($member, $request->all()));
@@ -211,7 +211,7 @@ class AdminController extends Controller
         }
 
         // Update the cache
-        event(new UserEvent($user), 'updated');
+        event(new UserEvent($user));
 
         flash('Member Updated');
 
@@ -324,7 +324,7 @@ class AdminController extends Controller
         $member->onBit(Member::APPROVED)->update();
 
         // Update the cache
-        event(new UserEvent($member), 'approved');
+        event(new UserEvent($member));
 
         flash('Member Approved');
 

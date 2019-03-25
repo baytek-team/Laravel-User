@@ -52,7 +52,7 @@
                 <td class="collapsing right aligned">
                     <div class="ui compact text menu">
                         <a href="{{ route('user.edit', ['user' => $user]) }}" class="item">
-                            <i class="pencil icon"></i>Edit
+                            <i class="fas fa-edit icon"></i>Edit
                         </a>
                         <a class="item" href="{{ route('user.roles', ['user' => $user]) }}">
                             <i class="protect icon"></i> Roles
