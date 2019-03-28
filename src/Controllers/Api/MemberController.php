@@ -42,16 +42,20 @@ class MemberController extends Controller
         $firstLetters = \DB::select("SELECT DISTINCT LEFT(meta.value, 1) as title
             FROM ${prefix}user_meta meta
             LEFT JOIN ${prefix}users users ON meta.user_id = users.id
+            INNER JOIN ${prefix}user_has_roles roles on roles.user_id = users.id
             WHERE meta.key = 'first_name'
             AND users.status & ?!=0
+            AND roles.role_id = 4
             AND CHAR_LENGTH(meta.value) > 0
             ORDER BY title ASC", [Member::APPROVED]);
 
         $lastLetters = \DB::select("SELECT DISTINCT LEFT(meta.value, 1) as title
             FROM ${prefix}user_meta meta
             LEFT JOIN ${prefix}users users ON meta.user_id = users.id
+            INNER JOIN ${prefix}user_has_roles roles on roles.user_id = users.id
             WHERE meta.key = 'last_name'
             AND users.status & ?!=0
+            AND roles.role_id = 4
             AND CHAR_LENGTH(meta.value) > 0
             ORDER BY title ASC", [Member::APPROVED]);
 
