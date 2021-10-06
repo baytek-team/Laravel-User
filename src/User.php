@@ -8,10 +8,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasPermissions;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, HasMetadata;
+    use Notifiable, HasRoles, HasPermissions, HasMetadata;
 
     /**
      * Table name used to select users
