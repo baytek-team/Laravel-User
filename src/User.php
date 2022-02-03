@@ -26,6 +26,12 @@ class User extends Authenticatable
     protected $assignRoles = [];
 
     /**
+     * New spatie needs a guard name
+     * @var string
+     */
+    protected $guard_name = 'web';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
