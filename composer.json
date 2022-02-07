@@ -15,8 +15,8 @@
         }
     },
     "require": {
-        "php": ">=5.6.4",
-        "spatie/laravel-permission": "^1.5"
+        "php": ">=7.2.0",
+        "spatie/laravel-permission": "^5.1"
     },
     "post-install-cmd": [
         "php artisan install:user"
